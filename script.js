@@ -156,8 +156,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // Detectar el idioma del navegador
+    const userLanguage = navigator.language || navigator.userLanguage; // 'en-US', 'fr-FR', etc.
+    const defaultLanguage = userLanguage.split('-')[0]; // 'en', 'fr', 'es', etc.
+
+    // Establecer el idioma por defecto en el select
+    const languageSelect = document.getElementById('language-select');
+    languageSelect.value = defaultLanguage;
+
     function languageSystem() {
-        const languageSelect = document.getElementById('language-select');
         const language = languageSelect.value;
         const texts = translations[language];
 
@@ -177,6 +184,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.documentElement.lang = language;
     }
 
-    document.getElementById('language-select').addEventListener('change', languageSystem);
+    // Llamar a languageSystem para actualizar el contenido
     languageSystem();
+
+    languageSelect.addEventListener('change', languageSystem);
 });
